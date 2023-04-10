@@ -105,7 +105,32 @@ To train the model, run the following command:
 ```
 python train.py
 ```
+```python
+defaults = dict(
+        learning_rate=2e-4,
+        batch_size=6,  # Adjust this if needed
+        iterations=400000,  # Adjust this if needed
+
+        log_to_wandb=False,
+        log_rate=10000,
+        checkpoint_rate=10000,
+        log_dir="logs",
+        project_name="ddpm",
+        run_name=run_name,
+        root_dir = "/home/flask-diffusion/cryoet/DDPM/cryoet_dataset/SNR001",
+        train_num = 10,
+
+        model_checkpoint=None,
+        optim_checkpoint=None,
+
+        schedule_low=1e-4,
+        schedule_high=0.02,
+
+        device=device,
+    )
+```
 please check ```create_argparser()``` to set configuration.
+
 
 It takes about 4 days to train 10 classes on 6 RTX3090.
 
