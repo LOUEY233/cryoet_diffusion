@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+        .container {
+            display: flex;
+        }
+        
+        .background-image1 {
+            position: relative;
+            width: calc((100% - 640px) / 2);
+            height: 790px;
+            overflow: hidden;
+        }
+        
+        .background-image1::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('./static/images/ba2.png');
+            background-size: cover;
+            background-position: left 30px top 40px;
+            background-repeat: no-repeat;
+            opacity: 0.6; /* Adjust the opacity value to your preference (0 to 1) */
+            filter: blur(0.2px); 
+        }
+        
+        .background-image2 {
+            position: relative;
+            width: calc((100% - 640px) / 2);
+            height: 790px;
+            overflow: hidden;
+        }
+        
+        .background-image2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('./static/images/ba1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.6; /* Adjust the opacity value to your preference (0 to 1) */
+            filter: blur(0.2px);
+            transform: rotate(45deg);
+            z-index: -1; 
+        }
+        
+		.box{
+			text-align: center;
+		}
+        .btn {
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .btn1 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #73c9e6;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn1:hover {
+            background-color: #73c9e6;
+            color: white;
+        }
+        .btn-container { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* display: grid;
+            grid-template-columns: repeat(10, min-content);
+            justify-content: center;
+            gap: 10px; */
+        }
+
+		.button{
+            height: 40px;
+            width: 100px;
+            margin-left: 10px;
+            border-radius: 20px;
+            border: 3px solid #FFFFFF;
+            background-color: black;
+            color:white;
+            font-size: 16px;
+            cursor: pointer;
+		}
+		.input{
+		    width: 450px;
+            border:1px solid #ccc;padding:7px 0px;
+            border-radius:15px;padding-left:20px;
+            -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition:border-color ease-in-out .15s,
+            -webkit-box-shadow ease-in-out .15s;
+            -o-transition:border-color ease-in-out .15s,
+            box-shadow ease-in-out .15s;
+            transition:border-color ease-in-out .15s,
+            box-shadow ease-in-out .15s}
+            input:focus{border-color:#66afe9;outline:0;
+                 -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),
+                 0 0 8px rgba(102,175,233,.6);
+                 box-shadow:inset 0 1px 1px rgba(0,0,0,.075),
+                 0 0 8px rgba(102,175,233,.6)
+		}
+        body {
+            background-color: black;
+        }
+        h1 {
+            color: white;
+        }
+        .img {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            z-index: 1; 
+        }
+
+        .x3d-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .x3d-box {
+            width: calc(100% / 6);
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .x3d-box2 {
+            width: calc(50%);
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        
+        @media (max-width: 1200px) {
+            .x3d-box {
+                width: calc(100% / 4);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .x3d-box {
+                width: calc(100% / 2);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .x3d-box {
+                width: 100%;
+            }
+        }
+        
+        .btn_box{
+            display: flex;
+            justify-content: center;
+        }
+
+	</style>
+    <script type="text/javascript" src="https://www.x3dom.org/download/x3dom.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.x3dom.org/download/x3dom.css">
+</head>
+<body>
+
+    <!--{% if result %}-->
+    <!--<h1>{{ result }}</h1>-->
+    <!--{% endif %}-->
+
+    <div class="box">
+        <h1 >SARS-COV-2 CryoET Diffusion Playground</h1>
+        <p style="color: gray;text-align:center;font-size:20px;">
+        Explore and generate novel protein structures related to a variety of important biological processes and viral interactions.
+        <br>
+         By simply clicking on a protein of interest, you can leverage the power of diffusion technology to create new protein structures that advance our understanding of their function and potential applications. 
+         <br>
+         Dive in and discover the fascinating world of protein research! 
+          <br>
+          Now we support the top 10 cryoET structures (from 1BXN to 1QOQ). It takes approximately 1 minute to generate each cryoET structure.
+        </p>
+        <p style="color:gainsboro; text-align:center; ">
+            <!-- Due to the large number of users, the server may experience problems. If you encounter an error, please try again. -->
+        </p>
+
+    </div>
+    <form method="post" action="/">
+        <div class="btn_box">
+            <div class="button-container" id="button-container">
+                
+            </div>
+        </div>
+    </form>
+
+    <div class="container">
+        <div class="background-image1"></div>
+        <div class="x3d-box2">
+            <x3d width="1280" height="1280">
+                <scene>
+                    <!-- <Inline url="/static/protein_x3d/1bxn.x3d"></Inline> -->
+                    <Inline url="/static/output/mrc/{{name}}/{{label}}.x3d"></Inline>
+                    <!-- <Inline url="{{ url_for('static', filename='/output/mrc/' ~ i) }}"></Inline> -->
+                </scene>
+            </x3d>
+        </div>        
+        <div class="background-image2"></div>
+    </div>
+
+    <div class="x3d-container">
+
+    {% for file, discription in protein_files_chunk %}
+        <div class="x3d-box">
+            <x3d width=150px" height=150px">
+                <scene>
+                    <Inline url="{{ url_for('static', filename='protein_x3d/' ~ file) }}"></Inline>
+                </scene>
+            </x3d>
+            <p style="color:gainsboro; position: relative; left: 40px;">{{ file }}</p>
+        </div>
+    {% endfor %}
+    <form class="box" method="post" action="/">
+        <input class="button" type="submit" name="previous_row" value="Previous">
+        <input class="button" type="submit" name="next_row" value="Next">
+    </form>
+    
+    <div class="box">
+        <p style="color: rgb(132, 120, 145);text-align:left;font-size:20px;">
+            Descriptions of the proteins:<br>
+    1bxn - Bovine pancreatic trypsin inhibitor, a model system for protein folding and protein-protein interactions.<br>
+    1c5u - Influenza A virus hemagglutinin, a surface protein involved in viral entry into host cells.<br>
+    1cf5 - Human angiotensin-converting enzyme 2 (ACE2), the receptor for SARS-CoV-2 spike protein.<br>
+    1e0p - Murine coronavirus (MHV) spike protein receptor-binding domain, involved in viral attachment to host cells.<br>
+    1f1b - Human angiotensinogen, a precursor of angiotensin I and II involved in the regulation of blood pressure.<br>
+    1hak - Adenylate kinase, an enzyme involved in energy metabolism and homeostasis of cellular adenine nucleotide composition.<br>
+    1hwn - Heme-containing peroxidase, an enzyme that reduces hydrogen peroxide to water.<br>
+    1hwo - Heme-containing peroxidase complexed with a protein inhibitor.<br>
+    1o6c - SARS coronavirus main protease, an essential enzyme for viral replication.<br>
+    1qoq - Heat shock protein Hsp90, a molecular chaperone involved in protein folding and cellular stress response.<br>
+    1vim - Vibrio cholerae neuraminidase, an enzyme involved in the cleavage of sialic acid from host cell surface glycans.<br>
+    1viy - Vibrio cholerae neuraminidase complexed with an inhibitor.<br>
+    1yg6 - Human dihydroorotate dehydrogenase, an enzyme involved in the de novo synthesis of pyrimidines.<br>
+    1z30 - SARS coronavirus RNA-dependent RNA polymerase, an enzyme responsible for viral RNA synthesis.<br>
+    2ane - Human neutrophil elastase, a serine protease involved in inflammation and tissue remodeling.<br>
+    2byu - Human matrix metalloproteinase-2, an enzyme involved in the degradation of extracellular matrix components.<br>
+    2fuv - Human immunodeficiency virus type 1 (HIV-1) capsid protein, a structural protein essential for viral assembly.<br>
+    2h12 - Human transmembrane protease serine 2 (TMPRSS2), an enzyme that cleaves and activates the SARS-CoV-2 spike protein.<br>
+    2ldb - SARS coronavirus non-structural protein 3 (nsp3) papain-like protease domain, involved in viral polyprotein processing.<br>
+    2oqa - Bacteriophage T4 endonuclease VII, an enzyme involved in DNA recombination and repair.<br>
+    2pcr - Human procaspase-3, an inactive precursor of the apoptosis executioner enzyme caspase-3.<br>
+    2qes - Human histamine N-methyltransferase, an enzyme involved in the inactivation of histamine.<br>
+    2wiz - SARS coronavirus non-structural protein 3 (nsp3) macro domain, involved in ADP-ribose binding and potential roles in viral replication and host immune response modulation.<br>
+    2z04 - SARS coronavirus non-structural protein 5 (nsp5) main protease, an enzyme critical for the proteolytic processing of viral polyproteins.<br>
+    2zzw - Human cathepsin B, a lysosomal cysteine protease involved in protein degradation and processing.<br>
+    3gl1 - Influenza B virus neuraminidase, an enzyme involved in viral release from host cells.<br>
+    3hhb - Human hemoglobin, the oxygen-carrying protein in red blood cells.<br>
+    3ku0 - SARS coronavirus non-structural protein 9 (nsp9), a single-stranded RNA-binding protein involved in viral RNA replication.<br>
+    3le7 - Dengue virus non-structural protein 3 (NS3) helicase domain, an enzyme involved in viral RNA replication and unwinding.<br>
+    4d4r - SARS coronavirus non-structural protein 10 (nsp10), a cofactor for the viral RNA-dependent RNA polymerase and other replication enzymes.<br>
+    4dxy - Human angiotensin-converting enzyme (ACE), a peptidase involved in the regulation of blood pressure.<br>
+    4fb9 - Human cyclin-dependent kinase 2 (CDK2), an enzyme involved in cell cycle regulation.<br>
+    4leh - Human legumain, a lysosomal cysteine protease involved in protein degradation.<br>
+    4yov - Human beta-2 adrenergic receptor, a G protein-coupled receptor involved in physiological responses to adrenaline and noradrenaline.<br>
+    5ddz - Human macrophage migration inhibitory factor, a cytokine involved in immune cell regulation.<br>
+    5wde - SARS-CoV-2 spike protein receptor-binding domain, responsible for binding to the human ACE2 receptor.<br>
+    5wvm - SARS-CoV-2 spike protein receptor-binding domain complexed with a human ACE2 receptor.<br>
+    5x1i - Human CDK9/cyclin T1 complex, a key regulator of transcriptional elongation.<br>
+    5xls - SARS-CoV-2 spike protein, a surface protein that mediates viral entry into host cells.<br>
+    6afk - Human p38 MAP kinase, an enzyme involved in cellular stress response and inflammation.<br>
+    6i7c - SARS-CoV-2 non-structural protein 13 (nsp13) helicase, an enzyme involved in viral RNA replication and unwinding.<br>
+    6jaw - SARS-CoV-2 non-structural protein 15 (nsp15), an endoribonuclease involved in viral RNA processing.<br>
+    6jhh - SARS-CoV-2 non-structural protein 16 (nsp16), an enzyme involved in viral RNA capping.<br>
+    6jhi - SARS-CoV-2 non-structural protein 16 (nsp16) complexed with its cofactor nsp10.<br>
+    6jvz - SARS-CoV-2 RNA-dependent RNA polymerase, an enzyme responsible for viral RNA synthesis.<br>
+    6lov - SARS-CoV-2 main protease complexed with an inhibitor, a potential target for antiviral drug development.<br>
+    6loy - SARS-CoV-2 main protease in an unliganded form, an enzyme critical for the proteolytic processing of viral polyproteins.<br>
+    6oo1 - SARS-CoV-2 non-structural protein 3 (nsp3) papain-like protease domain, involved in viral polyprotein processing and immune evasion.<br>
+    6t3e - Human transmembrane protease serine 2 (TMPRSS2) in complex with a covalent inhibitor, an enzyme that cleaves and activates the SARS-CoV-2 spike protein.<br>
+    7cgt - Human cathepsin G, a neutrophil serine protease involved in inflammation and host defense.
+        </p>
+
+</div>
+
+<script>
+    const buttonContainer = document.getElementById('button-container');
+    const buttonNames = [
+        "1bxn", "1c5u", "1cf5", "1e0p", "1f1b",
+        "1hak", "1hwn", "1hwo", "1o6c", "1qoq",
+        "1vim", "1viy", "1yg6", "1z30", "2ane",
+        "2byu", "2fuv", "2h12", "2ldb", "2oqa",
+        "2pcr", "2qes", "2wiz", "2z04", "2zzw",
+        "3gl1", "3hhb", "3ku0", "3le7", "4d4r",
+        "4dxy", "4fb9", "4leh", "4yov", "5ddz",
+        "5wde", "5wvm", "5x1i", "5xls", "6afk",
+        "6i7c", "6jaw", "6jhh", "6jhi", "6jvz",
+        "6lov", "6loy", "6oo1", "6t3e", "7cgt"
+    ]; 
+       
+    for (let i = 0; i < 50; i++) {
+        const button = document.createElement('button');
+        button.innerText = buttonNames[i];
+        button.dataset.info = i;
+        button.name = "button_value";  // 添加这一行
+        button.value = i; // 添加这一行
+        button.classList.add('btn', 'btn1');
+        button.onclick = function() {
+            sendButtonValue(this);
+        };
+        if (i % 10 === 0) {
+            const row = document.createElement('div');
+            buttonContainer.appendChild(row);
+        }
+        
+        buttonContainer.lastElementChild.appendChild(button);
+    }
+</script>
+</body>
+</html>
