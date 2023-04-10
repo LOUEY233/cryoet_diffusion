@@ -142,7 +142,7 @@ python sample_image.py
 ```
 python app.py
 ```
-You can engage with and view the 3D object on the web.
+You can engage with and view the 3D object on the web. (Web uses sample_image_copy.py)
 
 ![Image](./webui.png)
 ![Image2](./web2.png)
