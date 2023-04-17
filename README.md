@@ -138,6 +138,7 @@ It takes about 4 days to train 10 classes on 6 RTX3090.
 ```
 python sample_image.py
 ```
+
 ## WEB
 ```
 python app.py
